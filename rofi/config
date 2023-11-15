@@ -1,0 +1,6 @@
+# For the shell script
+rofi -show drun -modi "drun,~/bin/myapp-launcher.sh"
+
+# For the desktop entry
+rofi -show drun
+
