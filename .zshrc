@@ -30,7 +30,9 @@ export BROWSER=firefox
 export BROWSERCLI=links
 export EDITOR=lvim
 #export OPENAI_API_KEY="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"
-export OPENAI_API_KEY="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"
+export OPENAI_API_KEY="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"
+
+source ~/dotfilesos/zsh/scripts.sh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -91,6 +93,16 @@ ZSH_THEME="robbyrussell"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+#These four lines simply verify that the command “fzf” exists, and if it does, it sources fzf comple-
+#tion for Zsh and creates some key bindings you can use in the shell. What are these key bindings?
+#• CTRL+t - Search for a file in the current directory and sub-directories.
+#• CTRL+r - Search for an entry in the command history.
+#• ALT+c - Allow you to select a sub-directory and make it your working directory.
+if [ $(command -v "fzf") ]; then
+    source /usr/share/fzf/completion.zsh
+    source /usr/share/fzf/key-bindings.zsh
+fi
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -103,7 +115,8 @@ plugins=(git aliases zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-autocomplete
   aliases
-  cp) 
+  cp
+  fzf) 
 
 source $ZSH/oh-my-zsh.sh
 
@@ -315,4 +328,19 @@ alias personal='cp -Rf /personal/* ~'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+if [ $(command -v "fzf") ]; then
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+fi
 
+# Added fzf to termninal: 
+# CTRL+t - Search for a file in the current directory and sub-directories.
+# CTRL+r - Search for an entry in the command history.
+# ALT+c - Allow you to select a sub-directory and make it your working directory.
+if [ $(command -v "fzf") ]; then
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+fi
+
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
